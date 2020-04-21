@@ -1,20 +1,28 @@
 package com.example.myapplication.test.mvptest;
 
+import com.example.myapplication.base.BasePresenter;
+import com.example.myapplication.test.dagger2test.ThirdObj;
 import com.example.myapplication.test.mvptest.model.User;
 
-public class TestPresenter  {
+import javax.inject.Inject;
 
-    private  TestView view;
+public class TestPresenter extends BasePresenter<TestView> {
 
-    public TestPresenter(TestView view){
-        this.view = view;
+    @Inject
+    ThirdObj thirdObj;
+
+    @Inject
+    public TestPresenter(){
     }
 
+
+
     public void login(User user){
+        thirdObj.thirdAction();
         if("znn".equals(user.getUserName()) && "123456".equals(user.getPassword())){
-            view.showMessage("登陆成功");
+            getView().showMessage("登陆成功");
         }else {
-            view.showMessage("登陆失败");
+            getView().showMessage("登陆失败");
         }
     }
 }

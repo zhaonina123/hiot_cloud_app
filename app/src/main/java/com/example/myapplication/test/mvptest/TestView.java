@@ -1,5 +1,8 @@
 package com.example.myapplication.test.mvptest;
 
-public interface TestView {
+import com.example.myapplication.base.BaseView;
+
+public interface TestView extends BaseView {
+
     void showMessage(String msg);
 }
