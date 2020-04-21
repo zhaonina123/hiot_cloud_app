@@ -24,7 +24,7 @@ public class TestMVPActivity extends BaseActivity<TestView, TestPresenter> imple
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        getComponent().inject(this);
+        getActivityComponent().inject(this);
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_test_mvp);
@@ -32,7 +32,7 @@ public class TestMVPActivity extends BaseActivity<TestView, TestPresenter> imple
         final EditText etPassword = findViewById(R.id.et_password);
         Button btnLogin = findViewById(R.id.btn_login);
         final User user = new User();
-        final TestPresenter presenter = new TestPresenter();
+//        final TestPresenter presenter = new TestPresenter();
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,7 +55,5 @@ public class TestMVPActivity extends BaseActivity<TestView, TestPresenter> imple
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
-    public PresenterComponent getComponent(){
-        return DaggerPresenterComponent.builder().build();
-    }
+
 }

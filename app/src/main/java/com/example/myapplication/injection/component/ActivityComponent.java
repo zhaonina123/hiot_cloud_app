@@ -19,6 +19,7 @@ package com.example.myapplication.injection.component;
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.injection.PerActivity;
 import com.example.myapplication.injection.module.ActivityModule;
+import com.example.myapplication.test.mvptest.TestMVPActivity;
 //import com.huatec.hiot_cloud.main.MainActivity;
 //import com.huatec.hiot_cloud.injection.PerActivity;
 //import com.huatec.hiot_cloud.injection.module.ActivityModule;
@@ -37,6 +38,7 @@ public interface ActivityComponent {
 
     void inject(MainActivity mainActivity);
 
+    void inject(TestMVPActivity testMVPActivity);
     @Component.Builder
     interface ActivityComponentBuilder {
 
