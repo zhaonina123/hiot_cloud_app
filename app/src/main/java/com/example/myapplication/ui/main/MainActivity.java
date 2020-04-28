@@ -1,4 +1,4 @@
-package com.example.myapplication.main;
+package com.example.myapplication.ui.main;
 
 import android.os.Bundle;
 import android.widget.RadioGroup;
@@ -7,8 +7,8 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.myapplication.R;
-import com.example.myapplication.base.BaseActivity;
-import com.example.myapplication.base.BasePresenter;
+import com.example.myapplication.ui.base.BaseActivity;
+import com.example.myapplication.ui.base.BasePresenter;
 import com.example.myapplication.utils.Constans;
 
 public class MainActivity extends BaseActivity {
@@ -39,14 +39,14 @@ public class MainActivity extends BaseActivity {
                     case R.id.rb_mine:
                         vpMain.setCurrentItem(Constans.MAIN_VIEWPAGER_INDEX_MINE);
                         break;
-                        default:
+                    default:
                 }
             }
         } );
 
 
     }
-        @Override
+    @Override
     public BasePresenter createPresenter() {
         return null;
     }
@@ -58,3 +58,4 @@ public class MainActivity extends BaseActivity {
     }
 
 }
+

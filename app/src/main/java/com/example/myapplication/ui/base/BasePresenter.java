@@ -1,4 +1,4 @@
-package com.example.myapplication.base;
+package com.example.myapplication.ui.base;
 
 public class BasePresenter<V extends BaseView> {
     private V view;

@@ -18,8 +18,8 @@ package com.example.myapplication.injection.component;
 
 import com.example.myapplication.injection.PerActivity;
 import com.example.myapplication.injection.module.ActivityModule;
-import com.example.myapplication.main.MainActivity;
 import com.example.myapplication.test.mvptest.TestMVPActivity;
+import com.example.myapplication.ui.main.MainActivity;
 //import com.huatec.hiot_cloud.main.MainActivity;
 //import com.huatec.hiot_cloud.injection.PerActivity;
 //import com.huatec.hiot_cloud.injection.module.ActivityModule;

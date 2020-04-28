@@ -1,8 +1,8 @@
 package com.example.myapplication.test.mvptest;
 
-import com.example.myapplication.base.BasePresenter;
 import com.example.myapplication.test.dagger2test.ThirdObj;
 import com.example.myapplication.test.mvptest.model.User;
+import com.example.myapplication.ui.base.BasePresenter;
 
 import javax.inject.Inject;
 

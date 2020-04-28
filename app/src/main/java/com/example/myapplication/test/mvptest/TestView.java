@@ -1,6 +1,6 @@
 package com.example.myapplication.test.mvptest;
 
-import com.example.myapplication.base.BaseView;
+import com.example.myapplication.ui.base.BaseView;
 
 public interface TestView extends BaseView {
 
