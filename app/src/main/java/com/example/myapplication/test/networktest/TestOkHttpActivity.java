@@ -25,28 +25,28 @@ import okhttp3.Response;
 public class TestOkHttpActivity extends AppCompatActivity {
 
     //private static final String basUrl = "http://163.177.151.109";
-    private static final String basUrl = "114.67.88.191:8080";
+    private static final String basUrl = "http://114.67.88.191:8080";
     private static final String TAG = "TestOkHttpActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_ok_http);
-        //execute方法
+
+        //execute方法测试
         Button btnExecute = findViewById(R.id.btn_okhttp_execute);
         btnExecute.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 testExecute();
-
             }
         });
-        //enqueue方法
-        Button btnEnqueue = findViewById(R.id.btn_okhttp_execute);
+        //enqueue方法测试
+        Button btnEnqueue = findViewById(R.id.btn_okhttp_enqueue);
         btnEnqueue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                login("znn", "znn123", "app");
+                testEnqueue();
             }
         });
         //登录测试
@@ -54,7 +54,7 @@ public class TestOkHttpActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                login("znn", "znn123", "app");
             }
         });
         //获取用户信息
@@ -62,7 +62,7 @@ public class TestOkHttpActivity extends AppCompatActivity {
         btnGetUserInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getUserInfo("f7b9d68bdae545fdbaa56f96ce925f97_1785a681b4194aebb4700bc24f817dbf_use");
+                getUserInfo("f7b9d68bdae545fdbaa56f96ce925f97_d5472aa8db1243f6af15e69c749237c6_use");
 
             }
         });
@@ -71,11 +71,10 @@ public class TestOkHttpActivity extends AppCompatActivity {
         btnUpdateEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateEmail("f7b9d68bdae545fdbaa56f96ce925f97_1785a681b4194aebb4700bc24f817dbf_use", "3186109834@qq.com");
+                updateEmail("f7b9d68bdae545fdbaa56f96ce925f97_d5472aa8db1243f6af15e69c749237c6_use", "3186109834@qq.com");
 
             }
         });
-
     }
 
     /**
@@ -87,7 +86,8 @@ public class TestOkHttpActivity extends AppCompatActivity {
         OkHttpClient okHttpClient = new OkHttpClient();
         FormBody body = new FormBody.Builder().build();
         String url = basUrl + "/user/email?email=" + email;
-        Request request = new Request.Builder().put(body).url(url).header("Authorization", authorization).build();
+        Request request = new Request.Builder().put(body).url(url)
+                .header("Authorization", authorization).build();
         callEnqueue(okHttpClient, request);
     }
 
@@ -96,11 +96,27 @@ public class TestOkHttpActivity extends AppCompatActivity {
      * @param authorization
      */
     private void getUserInfo(String authorization) {
+
         OkHttpClient okHttpClient = new OkHttpClient();
         FormBody body = new FormBody.Builder().build();
         String url = basUrl + "/user/one";
-        Request request = new Request.Builder().get().url(url).header("Authorization", authorization).build();
+        Request request = new Request.Builder().get().url(url)
+                .header("Authorization", authorization).build();
         callEnqueue(okHttpClient, request);
+    }
+
+    private void callEnqueue(OkHttpClient okHttpClient, Request request) {
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                Log.e(TAG, "onFailure: " + e.getMessage(), e);
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                Log.d(TAG, "onResponse: " + response.body().string());
+            }
+        });
     }
 
     /**
@@ -112,26 +128,15 @@ public class TestOkHttpActivity extends AppCompatActivity {
     private void login(String userName, String password, String loginCode) {
         OkHttpClient okHttpClient = new OkHttpClient();
         FormBody body = new FormBody.Builder().build();
-        String url = basUrl + String.format("/auth/login?username=%s&password=%s&loginCode=%s",
+        String url = basUrl + String.format("/auth/login?username=%s&password=%s&loginCode=%s" ,
                 userName, password, loginCode);
         Request request = new Request.Builder().post(body).url(url).build();
         callEnqueue(okHttpClient, request);
     }
 
-    private void callEnqueue(OkHttpClient okHttpClient, Request request) {
-        okHttpClient.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                Log.d(TAG, "onFailure: " + e.getMessage(), e);
-            }
-
-            @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                Log.d(TAG, "onResponse: " + response.body().string());
-            }
-        });
-    }
-
+    /**
+     * 测试execute方式
+     */
     private void testExecute() {
 
         new Thread(){
@@ -142,7 +147,7 @@ public class TestOkHttpActivity extends AppCompatActivity {
                 Request request = new Request.Builder().url(basUrl).build();
                 try {
                     Response response = okHttpClient.newCall(request).execute();
-                    Log.d(TAG, "run:" + response.body().string());
+                    Log.d(TAG, "run: " + response.body().string());
                 } catch (IOException e) {
                     Log.e(TAG, "testExecute: " + e.getMessage(), e);
                 }
